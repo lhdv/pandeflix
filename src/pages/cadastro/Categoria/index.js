@@ -13,7 +13,7 @@ function CadastroCategoria() {
   // [categorias, setCategorias] : deconstruct the array into two
   //      variables, categorias keep the state value and
   //      setCategorias holds keep the function to set state value
-  const [categorias, setCategorias] = useState(['Test']);
+  const [categorias, setCategorias] = useState([]);
 
   const valoresIniciais = {
     nome: 'Categoria Inicial',
@@ -58,17 +58,13 @@ function CadastroCategoria() {
             onChange={handleChange}
           />
 
-          {/* <div>
-            <label>
-              Descrição:
-              <textarea
-                type="text"
-                value={valoresForm.desc}
-                name="desc"
-                onChange={handleChange}
-              />
-            </label>
-          </div> */}
+          <FormField
+            label="Descrição"
+            type="textarea"
+            value={valoresForm.desc}
+            name="desc"
+            onChange={handleChange}
+          />
 
           <FormField
             label="Cor"

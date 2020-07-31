@@ -33,6 +33,6 @@ const Button = styled.button`
         text-align: center;
       }
     }
-`
+`;
 
 export default Button;
