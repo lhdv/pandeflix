@@ -2,7 +2,7 @@
   "categorias": [
     {
       "id": 1,
-      "titulo": "Front End",
+      "nome": "Front End",
       "cor": "#6BD1FF",
       "link_extra": {
         "text": "Formação de Front End na Alura",

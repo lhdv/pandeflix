@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 import PageTemplate from '../../../components/PageTemplate';
@@ -13,11 +13,11 @@ function CadastroCategoria() {
   // [categorias, setCategorias] : deconstruct the array into two
   //      variables, categorias keep the state value and
   //      setCategorias holds keep the function to set state value
-  const [categorias, setCategorias] = useState([]);
+  const [categorias, setCategorias] = useState([{}]);
 
   const valoresIniciais = {
-    nome: 'Categoria Inicial',
-    desc: 'Descrição Inicial',
+    nome: '',
+    desc: '',
     cor: '#000',
   };
 
@@ -37,6 +37,30 @@ function CadastroCategoria() {
     );
   }
 
+  // useEffect: runs a code on every component update, only if the second
+  //            argument doesn't exist. Otherwise if it is a empty array
+  //            it will run once.
+  useEffect(() => {
+    // Simulates a fetch()
+    // setTimeout(() => {
+    //   setCategorias(
+    //     [...categorias,
+    //       'Back End',
+    //     ],
+    //   );
+    // }, 4 * 1000);
+    //
+
+    const url = 'http://localhost:8080/categorias';
+    fetch(url)
+      .then(async (resp) => {
+        const jsonResp = await resp.json();
+        setCategorias([
+          ...jsonResp,
+        ]);
+      });
+  }, []);
+
   return (
     <>
       <PageTemplate>
@@ -45,7 +69,7 @@ function CadastroCategoria() {
           event.preventDefault();
           setCategorias(
             [...categorias,
-              valoresForm.nome],
+              valoresForm],
           );
         }}
         >
@@ -79,9 +103,17 @@ function CadastroCategoria() {
           </Button>
         </form>
 
+        {categorias.length === 0 && (
+        <div>
+          Loading...
+        </div>
+        )}
+
         <ul>
-          {categorias.map((categoria) => (
-            <li key={categoria}>{ categoria }</li>
+          {categorias.map((categoria, indice) => (
+            <li key={`${categoria}${indice}`}>
+              {categoria.nome}
+            </li>
           ))}
         </ul>
 
