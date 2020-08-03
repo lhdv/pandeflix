@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import PageTemplate from '../../../components/PageTemplate';
 import Button from '../../../components/Button';
 import FormField from '../../../components/FormField';
+import useForm from '../../../hooks/useForm';
 
 function CadastroCategoria() {
   // useState('Test') : creates a new state to hold category name.
@@ -16,26 +17,12 @@ function CadastroCategoria() {
   const [categorias, setCategorias] = useState([{}]);
 
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     desc: '',
     cor: '#000',
   };
 
-  const [valoresForm, setValoresForm] = useState(valoresIniciais);
-
-  function setValor(chave, valor) {
-    setValoresForm({
-      ...valoresForm,
-      [chave]: valor,
-    });
-  }
-
-  function handleChange(event) {
-    setValor(
-      event.target.getAttribute('name'),
-      event.target.value,
-    );
-  }
+  const { valoresForm, handleChange, clearForm } = useForm(valoresIniciais);
 
   // useEffect: runs a code on every component update, only if the second
   //            argument doesn't exist. Otherwise if it is a empty array
@@ -71,14 +58,16 @@ function CadastroCategoria() {
             [...categorias,
               valoresForm],
           );
+
+          clearForm();
         }}
         >
 
           <FormField
-            label="Nome da Categoria"
+            label="Título da Categoria"
             type="text"
-            value={valoresForm.nome}
-            name="nome"
+            value={valoresForm.titulo}
+            name="titulo"
             onChange={handleChange}
           />
 
@@ -112,7 +101,7 @@ function CadastroCategoria() {
         <ul>
           {categorias.map((categoria, indice) => (
             <li key={`${categoria}${indice}`}>
-              {categoria.nome}
+              {categoria.titulo}
             </li>
           ))}
         </ul>
