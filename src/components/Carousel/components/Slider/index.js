@@ -37,7 +37,6 @@ export const SliderItem = styled.li`
   }
 `;
 
-
 const Slider = ({ children }) => (
   <Container>
     <SlickSlider {...{
@@ -48,7 +47,7 @@ const Slider = ({ children }) => (
       variableWidth: true,
       adaptiveHeight: true,
       slidesToShow: 5,
-      slidesToScroll: 1
+      slidesToScroll: 1,
     }}
     >
       {children}
@@ -56,4 +55,4 @@ const Slider = ({ children }) => (
   </Container>
 );
 
-export default Slider; 
+export default Slider;
